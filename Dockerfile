@@ -25,10 +25,16 @@ deb http://mirrors.163.com/debian/ bullseye-updates main contrib
 EOF
 
 RUN apt update \
-	&& apt upgrade -y \
-	&& apt install -y locales vim git wget tree bd file \
-		build-essential lib32z1 libncurses5-dev \
-		make cmake gcc-multilib 
+	&& apt upgrade -y
+
+RUN apt install -y locales vim bc xz-utils bzip2 unzip lzip help2man file \
+	patch gawk make cmake gcc flex texinfo  wget curl
+
+RUN apt install -y binutils meson ninja-build rsync  libtool-bin libtool-doc \
+	build-essential gcc-multilib lib32z1 libncurses5-dev
+
+RUN apt install -y bison  byacc  coreutils  pkg-config  libncursesw5-dev
+
 
 RUN cp /etc/locale.gen /etc/locale.gen.bak;\
 		echo 'en_US.UTF-8 UTF-8' > /etc/locale.gen;\
